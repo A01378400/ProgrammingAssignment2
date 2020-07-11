@@ -65,9 +65,56 @@ Computing the inverse of a square matrix can be done with the solve function in 
 
 For this assignment, assume that the matrix supplied is always invertible.
 
+## My solution 
+
+# Functions
+
+cacheMatrix.R:
 
 
+```
+## Caching the Inverse of a Matrix:
+## Matrix inversion is usually a costly computation and there may be some 
+## benefit to caching the inverse of a matrix rather than compute it repeatedly.
 
+## This function creates a special "matrix" object that can cache its inverse.
+
+
+MakeCacheMatrix <- function(x = matrix()){
+        
+        inv <- NULL
+        set <- function(y){
+                
+                x <<- y
+                inv <<- NULL
+        }
+        
+        get <- function(){x}
+        setInverse <- function(inverse) {inv <<- iinverse}
+        getInverse <- function() {inv}
+        list(set = set, get = get, setInverse = setInverse, getInverse = getInverse)
+}
+
+## This function computes the inverse of the special "matrix" created by 
+## makeCacheMatrix above. If the inverse has already been calculated (and the 
+## matrix has not changed), then it should retrieve the inverse from the cache.
+
+CacheSolve <- function(x, ...){
+        
+        inv <- x$getInverse()
+        
+        if(!is.null(inv)){
+                
+                message("Getting Cached Data")
+                return(inv)
+        }
+        
+        mat <- x$get()
+        inv <- solve(mat, ...)
+        x$selectInverse(inv)
+        inv
+}
+```
 
 
 
