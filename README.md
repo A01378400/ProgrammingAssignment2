@@ -67,7 +67,7 @@ For this assignment, assume that the matrix supplied is always invertible.
 
 ## My solution 
 
-# Functions
+### Functions
 
 cacheMatrix.R:
 
